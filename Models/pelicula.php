@@ -1,7 +1,8 @@
 <?php
-require_once './Settings/db.php';
+require_once __DIR__ . '/../settings/db.php';
 
-class Pelicula {
+class Pelicula
+{
     protected $db;
 
     public function __construct()
@@ -14,7 +15,11 @@ class Pelicula {
 
     public function get()
     {
-        $query = "SELECT * FROM peliculas";
+        $query = "SELECT p.id, p.nombre, p.aniopubli, g.nombre AS genero, d.nombre AS director, p.descripcion
+        FROM peliculas p
+        INNER JOIN genero g ON p.id_genero = g.id_genero
+        INNER JOIN director d ON p.id_director = d.id_director";
+        
         $stmt = $this->db->prepare($query);
         $stmt->execute();
 

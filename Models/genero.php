@@ -1,7 +1,8 @@
 <?php
-require_once './Settings/db.php';
+require_once __DIR__ . '/../settings/db.php';
 
-class Genero {
+class Genero 
+{
     protected $db;
 
     public function __construct()
@@ -9,6 +10,8 @@ class Genero {
         $connection = new db();
         $this->db = $connection->connect();
     }
+
+    // READ - Obtener todos los géneros
 
     public function get()
     {
@@ -26,6 +29,8 @@ class Genero {
         return $data_arr ?: ['message' => 'Sin datos'];
     }
 
+    // CREATE - Agregar nuevo género
+
     public function create($data)
     {
         $query = "INSERT INTO genero (nombre) VALUES (?)";
@@ -41,6 +46,8 @@ class Genero {
         return ['message' => 'Género agregado con éxito'];
     }
 
+    // UPDATE - Editar género
+
     public function update($id, $data)
     {
         $query = "UPDATE genero SET nombre=? WHERE id_genero=?";
@@ -55,6 +62,8 @@ class Genero {
 
         return ['message' => 'Género actualizado con éxito'];
     }
+
+    // DELETE - Eliminar género
 
     public function delete($id)
     {
